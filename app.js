@@ -3,7 +3,7 @@ const request = require('request')
 const app = express()
 const path = require('path');
 const port = process.env.PORT || 8080
-const events_api = process.env.EVENTS_API || "http://localhost:8081"
+const events_api = process.env.EVENTS_API || "http://geocoder.default.dev.gswkbook.com"
 
 app.use(express.static('public'));
 
@@ -12,6 +12,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/events', (req, res) => {
+    var querystring = require('url').parse(req.url).query;
+    console.log(events_api+"?"+querystring);
     request(events_api+req.query, function (error, response, html) {
         res.setHeader('content-type', 'text/json');
         res.send(response.body);
