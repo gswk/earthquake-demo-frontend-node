@@ -13,8 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/events', (req, res) => {
     var querystring = require('url').parse(req.url).query;
-    console.log(events_api+"?"+querystring);
-    request(events_api+req.query, function (error, response, html) {
+    request(events_api+"?"+querystring, function (error, response, html) {
         res.setHeader('content-type', 'text/json');
         res.send(response.body);
     });
